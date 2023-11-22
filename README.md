@@ -6,7 +6,7 @@
 | ------------------ | ------ | ------------------------ |
 | nick_name          | string | null: false              |
 | email              | string | null: false, unique: true|
-| password           | string | null: false              |
+| encrypted_password | string | null: false              |
 | family_name        | string | null: false              |
 | first_name         | string | null: false              |
 | family_name_kana   | string | null: false              |
@@ -15,90 +15,55 @@
 
 ### Association
 
-- has_many :items
 - has_many :orders
 
 ## Items テーブル
 
-| Column            | Type      | Options                        |
-| ----------------- | --------- | ------------------------------ |
-| name              | string    | null: false                    |
-| description       | text      | null: false                    |
-| status_id         | reference | null: false, foreign_key: true |
-| category_id       | reference | null: false, foreign_key: true |
-| delivery_charge_id| reference | null: false, foreign_key: true |
-| delivery_day_id   | reference | null: false, foreign_key: true |
+| Column            | Type    | Options     |
+| ----------------- | ------- | ----------- |
+| name              | string  | null: false |
+| description       | text    | null: false |
+| status            | string  | null: false |
+| category          | string  | null: false |
+| delivery_charge   | integar | null: false |
+| delivery_area     | string  | null: false |
+| delivery_day      | integar | null: false |
+| price             | integar | null: false |
 
 ### Association
 
 - has_many :orders
-- belongs_to :users
-- belongs_to :status
-- belongs_to :item_images
-- belongs_to :categorys
-- belongs_to :delivery_charges
-- belongs_to :delivery_days
+- belongs_to_active_hash :status
+- belongs_to_active_hash :category
+- belongs_to_active_hash :delivery_charge
+- belongs_to_active_hash :delivery_area
+- belongs_to_active_hash :delivery_day
+
 
 ## orders テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| items_id         | text       | null: false                    |
-| card_number      | references | null: false                    |
-| zip_code         | references | null: false                    |
-| city             | references | null: false                    |
-| street_address   | references | null: false                    |
-| building_name    | references | null: false                    |
-| telephone_number | references | null: false                    |
-| user_id          | references | null: false, foreign_key: true |
+| user             | references | null: false, foreign_key: true |
+| item             | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :users
+- belongs_to :users
 - belongs_to :items
 
-## status テーブル
+## delivery_addresses テーブル
 
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| name      | text       | null: false                    |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| zip_code         | string     | null: false                    |
+| state            | text       | null: false                    |
+| city             | string     | null: false                    |
+| street_address   | string     | null: false                    |
+| building_name    | string     | null: false                    |
+| telephone_number | string     | null: false                    |
+| order            | references | null: false, foreign_key: true |
+
 
 ### Association
-- belongs_to :items
-
-## item_images テーブル
-
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| image     | text       | null: false                    |
-| item_id   | text       | null: false, foreign_key: true |
-
-### Association
-- belongs_to :items
-
-## categorys テーブル
-
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| category  | text       | null: false                    |
-
-### Association
-- belongs_to :items
-
-## delivery_charges テーブル
-
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| delivery_charge | text       | null: false                    |
-
-### Association
-- belongs_to :items
-
-## delivery_days テーブル
-
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| delivery_day | text       | null: false                    |
-
-### Association
-- belongs_to :items
+- belongs_to :orders
