@@ -97,7 +97,7 @@ GEM
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.6.0)
-    irb (1.9.0)
+    irb (1.9.1)
       rdoc
       reline (>= 0.3.8)
     jbuilder (2.11.5)
@@ -118,7 +118,7 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     mysql2 (0.5.5)
-    net-imap (0.4.5)
+    net-imap (0.4.6)
       date
       net-protocol
     net-pop (0.1.2)
@@ -127,8 +127,10 @@ GEM
       timeout
     net-smtp (0.4.0)
       net-protocol
-    nio4r (2.6.0)
-    nokogiri (1.15.4-x86_64-darwin)
+    nio4r (2.6.1)
+    nokogiri (1.15.5-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
     pg (1.5.4)
     psych (5.1.1.1)
@@ -217,6 +219,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap
