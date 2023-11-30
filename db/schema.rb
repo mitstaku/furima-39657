@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_27_011419) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_26_083033) do
   create_table "users", charset: "utf8", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "nick_name", null: false
-    t.string "email", null: false
-    t.string "encrypted_password", null: false
     t.string "family_name", null: false
     t.string "first_name", null: false
     t.string "family_name_kana", null: false
