@@ -1,7 +1,7 @@
 <%= render "shared/header" %>
 <div class='main'>
 
-  <%# 画面上部の「人生を変えるフリマアプリ」帯部分 %>
+  <%# 画面上部の人生を変えるフリマアプリ部分 %>
   <div class='title-contents'>
     <h2 class='service-title'>
       人生を変えるフリマアプリ
@@ -17,9 +17,8 @@
       <%= link_to image_tag("google-play.png", class:"google-btn"), "#" %>
     </div>
   </div>
-  <%# /画面上部の「人生を変えるフリマアプリ」帯部分  %>
 
-  <%# FURIMAが選ばれる3つの理由部分 %>
+  <%# FURIMAが選ばれる理由部分 %>
   <div class='select-reason-contents'>
     <h2 class='title'>
       FURIMAが選ばれる3つの理由
@@ -60,9 +59,8 @@
       </li>
     </ul>
   </div>
-  <%# /FURIMAが選ばれる3つの理由部分 %>
 
-  <%# 画面中央の「会員数日本一位」帯部分 %>
+  <%# 会員登録数日本一位部分 %>
   <div class='ad-contents'>
     <h2 class='ad-title'>
       会員数日本一位
@@ -81,9 +79,8 @@
       <%= link_to image_tag("google-play.png", class:"google-btn"), "#" %>
     </div>
   </div>
-  <%# /画面中央の「会員数日本一位」帯部分 %>
 
-  <%# FURIMAの特徴 %>
+  <%# FURIMAの特徴部分 %>
   <div class='feature-contents'>
     <h2 class='title'>
       FURIMAの特徴
@@ -118,9 +115,8 @@
       </li>
     </ul>
   </div>
-  <%# /FURIMAの特徴 %>
 
-  <%# 商品一覧 %>
+  <%# ピックアップカテゴリー部分 %>
   <div class='item-contents'>
     <h2 class='title'>ピックアップカテゴリー</h2>
     <div class="subtitle" >
@@ -128,37 +124,36 @@
     </div>
     <ul class='item-lists'>
 
-      <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
+    <% @items.each do |item| %>
       <li class='list'>
-        <%= link_to "#" do %>
+        <%= link_to item_path(item) do %>
         <div class='item-img-content'>
-          <%= image_tag "item-sample.png", class: "item-img" %>
-
-          <%# 商品が売れていればsold outを表示しましょう %>
-          <div class='sold-out'>
-            <span>Sold Out!!</span>
-          </div>
-          <%# //商品が売れていればsold outを表示しましょう %>
-
+        <%= image_tag item.image, class: "item-img" if item.image.attached? %>
+          <%# 商品が売れている場合はsold outを表示する %>
+          <%# if item.order != nil %>
+            <%#<div class='sold-out'>
+              <span>Sold Out!!</span>
+            </div>
+          <% end %>
         </div>
         <div class='item-info'>
           <h3 class='item-name'>
-            <%= "商品名" %>
+            <%= item.name %>
           </h3>
           <div class='item-price'>
-            <span><%= "販売価格" %>円<br><%= '配送料負担' %></span>
+            <span><%= number_with_delimiter(item.price) %>円<br><%= item.delivery_charge.name %></span>
             <div class='star-btn'>
               <%= image_tag "star.png", class:"star-icon" %>
               <span class='star-count'>0</span>
             </div>
           </div>
-        </div>
+        </div> 
         <% end %>
       </li>
-      <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
+    <% end %>
 
-      <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
-      <%# 商品がある場合は表示されないようにしましょう %>
+    <%# 商品がない場合はダミー商品を表示する %>
+    <% if @items.blank? then %>
       <li class='list'>
         <%= link_to '#' do %>
         <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
@@ -176,11 +171,9 @@
         </div>
         <% end %>
       </li>
-      <%# //商品がある場合は表示されないようにしましょう %>
-      <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>
+    <% end %>
     </ul>
   </div>
-  <%# /商品一覧 %>
 </div>
 <%= link_to(new_item_path, class: 'purchase-btn') do %>
   <span class='purchase-btn-text'>出品する</span>
