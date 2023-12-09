@@ -16,14 +16,14 @@ class Item < ApplicationRecord
 
   with_options presence: true do
     validates :image
-    validates :name,length: { maximum: 40 }
+    validates :name, length: { maximum: 40 }
     validates :description
     validates :category_id
     validates :status_id
     validates :delivery_charge_id
     validates :prefecture_id
     validates :delivery_day_id
-    validates :price,numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+    validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
   end
 
   with_options numericality: { other_than: 0 } do
@@ -33,5 +33,4 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :delivery_day_id
   end
-
 end
