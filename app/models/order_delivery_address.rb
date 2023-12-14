@@ -9,7 +9,6 @@ class OrderDeliveryAddress
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :city
     validates :street_address
-    validates :building_name
     validates :telephone_number, format: { with: /\A[0-9]{11}\z/, message: 'is invalid' }
     validates :order_id
   end
