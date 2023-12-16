@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :order_delivery_address do
-
     user_id { Faker::Number.non_zero_digit }
     item_id { Faker::Number.non_zero_digit }
     order_id { Faker::Number.non_zero_digit }
@@ -10,5 +9,6 @@ FactoryBot.define do
     street_address     { '1-3-61' }
     building_name      { '東京ドーム' }
     telephone_number   { '09012345678' }
+    token { 'tok_abcdefghijk00000000000000000' }
   end
 end
