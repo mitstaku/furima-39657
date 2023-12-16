@@ -130,8 +130,8 @@
         <div class='item-img-content'>
         <%= image_tag item.image, class: "item-img" if item.image.attached? %>
           <%# 商品が売れている場合はsold outを表示する %>
-          <%# if item.order != nil %>
-            <%#<div class='sold-out'>
+          <% if item.order != nil %>
+            <div class='sold-out'>
               <span>Sold Out!!</span>
             </div>
           <% end %>
