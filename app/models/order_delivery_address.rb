@@ -10,13 +10,12 @@ class OrderDeliveryAddress
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :city
     validates :street_address
-    validates :telephone_number, format: { with: /\A[0-9]{11}\z/, message: 'is invalid' }
+    validates :telephone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid' }
     validates :token
   end
 
   def save
     order = Order.create(user_id:, item_id:)
-    DeliveryAddress.create(zip_code:, prefecture_id:, city:, street_address:,
-                           building_name:, telephone_number:, order_id:)
+    DeliveryAddress.create(zip_code:, prefecture_id:, city:, street_address:, building_name:, telephone_number:, order_id:)
   end
 end

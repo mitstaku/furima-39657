@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe OrderDeliveryAddress, type: :model do
   before do
-    @order_delivery_address = FactoryBot.build(:order_delivery_address)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @order_delivery_address = FactoryBot.build(:order_delivery_address, user_id: user.id, item_id: item.id)
   end
 
   # 成功パターン
@@ -74,10 +76,34 @@ RSpec.describe OrderDeliveryAddress, type: :model do
         expect(@order_delivery_address.errors.full_messages).to include 'Telephone number is invalid'
       end
 
+      it 'telephone_number:９桁以下' do
+        @order_delivery_address.telephone_number = '090123456'
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include 'Telephone number is invalid'
+      end
+
+      it 'telephone_number:１２桁以上' do
+        @order_delivery_address.telephone_number = '0901234567890'
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include 'Telephone number is invalid'
+      end
+
       it 'token:空' do
         @order_delivery_address.token = nil
         @order_delivery_address.valid?
         expect(@order_delivery_address.errors.full_messages).to include("Token can't be blank")
+      end
+
+      it 'user_id:空' do
+        @order_delivery_address.user_id = nil
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_id:空' do
+        @order_delivery_address.item_id = nil
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
