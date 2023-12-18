@@ -1,5 +1,7 @@
-const priceInput = document.getElementById("item-price");
-priceInput.addEventListener("input", () => {
+window.addEventListener('load', () => {
+  const priceInput = document.getElementById("item-price");
+  if (!priceInput){ return false;}
+  priceInput.addEventListener("input", () => {
   const inputValue = priceInput.value;
 
   const addTaxDom = document.getElementById("add-tax-price");
@@ -7,4 +9,5 @@ priceInput.addEventListener("input", () => {
   
   const profit = document.getElementById("profit");
   profit.innerHTML = inputValue - addTaxDom.innerHTML;
+  })
 });
