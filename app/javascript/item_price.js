@@ -1,4 +1,5 @@
-window.addEventListener('load', () => {
+document.addEventListener('input', function(event) {
+  if (event.target.id === 'item-price') {
   const priceInput = document.getElementById("item-price");
   if (!priceInput){ return false;}
   priceInput.addEventListener("input", () => {
@@ -9,5 +10,6 @@ window.addEventListener('load', () => {
   
   const profit = document.getElementById("profit");
   profit.innerHTML = inputValue - addTaxDom.innerHTML;
-  })
+    })
+  }
 });
